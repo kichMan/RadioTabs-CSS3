@@ -1,0 +1,74 @@
+////////////////CLEARFIX////////////////
+.radio-tabs, .radio-tabs>input, .radio-tabs>label, .radio-tabs div {
+    position: relative;
+    display:block;
+    margin: 0; padding: 0;
+}
+////////////////CLEARFIX////////////////
+.radio-tabs {
+    @bradius    : 4px;
+    @bwidth     : @rt_width_Border;
+    @tabwidth   : @rt_width / @rt_tabs_Sum;
+    
+    width: @rt_width;
+    overflow-x: hidden;
+    &> input, &> label {
+        float:left;
+        margin-left: @bwidth*2;
+        padding-bottom: @bwidth;
+        width: @tabwidth - (@bwidth*2);
+        border:@bwidth solid @rt_color_childOut;
+        border-bottom: 0;
+        background-color: @rt_color_childOut;
+        .hlp_BoxSizing(border-box);
+        text-align: center;
+        z-index: 0;
+    }
+    &> input {
+        .hlp_Opacity(0);
+    }
+    &>label {
+        margin-left: @bwidth - (@tabwidth);
+        background-color: @rt_color_childOut;
+        .hlp_BorderRadius(@bradius @bradius 0 0);
+    }
+    &>input:not(:checked):not(:disabled):hover + label,
+     {
+        background-color: @rt_color_childOver;
+        border-color: @rt_color_childOver;
+        cursor: pointer;
+    }
+    &>input:checked + label {
+        background-color: @rt_color_Base;
+        border-color: @rt_color_Border;
+        z-index: 2;
+    }
+    &>input:disabled + label {
+        background-color: fadeout(@rt_color_childDis, 50);
+        border-color: fadeout(@rt_color_childDis, 50);
+        color: fadein(@rt_color_childDis, 50);
+    }
+    &> input:first-child:checked + label ~ div{
+        .hlp_BorderRadius(0 @bradius @bradius @bradius);
+    }
+    &> input:last-of-type:checked + label ~ div{
+        .hlp_BorderRadius(@bradius 0 @bradius @bradius);
+    }
+    &> div{
+        margin: @bwidth @bwidth 0 @bwidth;
+        background-color: @rt_color_Base;
+        border:@bwidth solid @rt_color_Border;
+        .hlp_BorderRadius(@bradius);
+        z-index: 1;
+        &> div{
+            display:none;
+        }
+    }
+    //Active
+    &>input.tab-1:checked ~ div > div:nth-child(1),
+    &>input.tab-2:checked ~ div > div:nth-child(2),
+    &>input.tab-3:checked ~ div > div:nth-child(3)
+    {
+        display:block;
+    }
+}

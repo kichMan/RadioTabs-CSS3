@@ -1,0 +1,14 @@
+.hlp_BorderRadius(@r:4px){
+  -webkit-border-radius: @r;
+     -moz-border-radius: @r;
+          border-radius: @r;
+}
+.hlp_BoxSizing(@b:content-box){
+  -webkit-box-sizing: @b;
+     -moz-box-sizing: @b;
+          box-sizing: @b;
+}
+.hlp_Opacity(@o:100){
+  opacity: @o / 100;
+   filter: e(%("alpha(opacity=%d)", @o));
+}
